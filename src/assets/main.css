@@ -1,20 +1,11 @@
 @import "./base.css";
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-<<<<<<< Updated upstream
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
-=======
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
->>>>>>> Stashed changes
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-<<<<<<< Updated upstream
   font-family: 'Poppins', 'Lato' 'Courier New', Courier, monospace;
-=======
-  font-family: 'Poppins','Lato' 'Courier New', Courier, monospace;
->>>>>>> Stashed changes
   color: #211F26;
 }
