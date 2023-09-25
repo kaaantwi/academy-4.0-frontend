@@ -26,7 +26,7 @@
     }
     .text{
         color: #2B3C4E;
-        /* font-family: 'Lato'; */
+        font-family: 'Lato';
         font-size: 16px;
         font-style: italic;
         font-weight: 500;

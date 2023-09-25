@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import LoginView from "../views/LoginView.vue"
+import LoginView from "../views/LoginView.vue";
+import ApplicationView from "../views/ApplicationView.vue";
 import UserDashboardLayout from "../layouts/UserDashboardLayout.vue";
 import DashboardView from "../views/Users/DashboardView.vue";
 import AssessmentView from "../views/Users/AssessmentView.vue";
@@ -37,6 +38,11 @@ const router = createRouter({
       path: "/signin",
       name: "login",
       component: LoginView,
+    },
+    {
+      path: "/application-form",
+      name: "application",
+      component: ApplicationView,
     },
     /*
      * USER ROUTES
