@@ -43,20 +43,21 @@ const router = createRouter({
      */
     {
       path: "/user",
+      name: "user",
       component: UserDashboardLayout,
       children: [
         {
-          path: "dashboard",
-          name: "Dashboard",
+          path: "/dashboard",
+          name: "dashboard",
           component: DashboardView
         },
         {
-          path: "assessment",
+          path: "/assessment",
           name: "assessment",
           component: AssessmentView
         },
         {
-          path: "questions",
+          path: "/questions",
           name: "questions",
           component: QuestionsView
         },
