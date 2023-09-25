@@ -48,8 +48,8 @@ const router = createRouter({
      * USER ROUTES
      */
     {
-      path: "/user",
-      name: "user",
+      path: "/users",
+      name: "users",
       component: UserDashboardLayout,
       children: [
         {

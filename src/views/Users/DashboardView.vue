@@ -29,6 +29,12 @@ import DashboardTitleComponent from '../../components/DashboardTitleComponent.vu
         <div class="cards">
             <div class="card">
                 <h6 class="card-title">Updates</h6>
+                <div class="card-content">
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                </div>
             </div>
             <div class="card">
                 <h6 class="card-title">Updates</h6>
@@ -100,6 +106,7 @@ h6{
     height: 453px;
     border-radius: 4px;
     border: 1px solid #ECECF9;
+    padding: 34px;
 }
 .card-title{
     color: #2B3C4E;
