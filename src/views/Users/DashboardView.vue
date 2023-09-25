@@ -1,5 +1,6 @@
 <script setup>
 import DashboardTitleComponent from '../../components/DashboardTitleComponent.vue';
+import { RouterLink } from 'vue-router'
 
 
 </script>
@@ -37,7 +38,20 @@ import DashboardTitleComponent from '../../components/DashboardTitleComponent.vu
                 </div>
             </div>
             <div class="card">
-                <h6 class="card-title">Updates</h6>
+                <h6 class="card-title">Take Assessment</h6>
+                <div class="card-assessment">
+                    <p>
+                    We have 5 days left until the next assessment Watch this space
+                  </p>
+                  <p>
+                    You can now take the Assessment 
+                  </p>
+                  <div>
+                    <button disabled>
+                        <RouterLink class="links" to="/assessment">Take Assessment</RouterLink>
+                    </button>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -107,6 +121,9 @@ h6{
     border-radius: 4px;
     border: 1px solid #ECECF9;
     padding: 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 87px;
 }
 .card-title{
     color: #2B3C4E;
@@ -116,5 +133,45 @@ h6{
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.32px;
+}
+.card-content{
+    display: flex;
+    flex-direction: column;
+    gap: 74px;
+    justify-content: center;
+}
+hr{
+    border: 1px solid #cecece;
+    background: #cecece;
+}
+.card-assessment{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: 50px;
+}
+.links{
+    text-decoration: none;
+    color: #fff;
+}
+
+button{
+    background-color: #B1B1B1;
+    padding: 10px 40px;
+}
+p{
+    color: #4F4F4F;
+    text-align: center;
+    font-family: 'Lato';
+    font-size: 16.727px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 343px;
+    width: 100%;
+    /* margin: auto; */
+
 }
 </style>

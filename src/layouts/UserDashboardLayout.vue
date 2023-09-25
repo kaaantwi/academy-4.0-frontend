@@ -26,7 +26,7 @@ const route = useRoute();
             <p class="link-text">Assessment</p>
           </RouterLink>
 
-          <RouterLink class="links logout" :to="{ name: 'user' }">
+          <RouterLink class="links logout" :to="{ name: 'users' }">
             <div class="icons"><img src="@/assets/icons/logouticon.svg" alt="" /></div>
             <p class="link-text">Log Out</p>
           </RouterLink>
