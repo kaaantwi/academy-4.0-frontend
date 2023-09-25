@@ -1,0 +1,140 @@
+<script setup>
+import { ref } from 'vue';
+import { RouterLink } from "vue-router";
+
+// Define a reactive property to track the password visibility
+const passwordVisible = ref(false);
+
+// Function to toggle password visibility
+function togglePassword() {
+  passwordVisible.value = !passwordVisible.value;
+}
+
+</script>
+
+<template>
+    <section>
+        <div class="main">
+            <img src="../assets/icons/small_logo.svg">
+            <p>Applicant Log In</p>
+        </div>
+
+        <div class="forms">
+            <div class="input-options">
+                <label for="input">Email Address</label>
+                <input type="text" class="field-input">
+            </div>
+            <div class="input-options">
+                <label for="password">Password</label>
+                <div class="password-field">
+                    <input :type="passwordVisible ? 'text' : 'password'" class="field-input">
+                    <span class="password-toggle" @click="togglePassword">
+                    <img src="../assets/icons/eye.svg"/>
+                    </span>
+                </div>
+            </div>
+            <div class="btn">
+                <RouterLink to="/registration"><button>Sign In</button></RouterLink>
+                <div class="btn-text">
+                    <p>Don’t have an account yet? <RouterLink to="/signup" class="link">Sign Up</RouterLink></p>
+                    <h4>Forgot Password?</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<style scoped>
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 225px;
+    gap: 24px;
+    padding-bottom: 69px;
+}
+.main p{
+    color: #2B3C4E;
+    font-family: 'Lato';
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: normal;
+}
+.forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+.input-options{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.input-options label{
+    color: #4F4F4F;
+    font-family: 'Lato';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.field-input{
+    border-radius: 4px;
+    border: 1.5px solid #BDBDBD;
+    width: 379px;
+    height: 48px;
+}
+/* Additional CSS for the password toggle icon */
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #000;
+}
+
+/* Style the eye icon */
+.password-toggle img {
+    width: 18px;
+}
+.btn{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+button{
+    padding: 16px 165px 14px 165px;
+    color: #FFF;
+    font-family: 'Lato';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: #7557D3;
+    border: none;
+}
+.btn-text{
+    display: flex;
+    justify-content: space-between;
+}
+.btn-text p, .btn-text h4{
+    color: #4F4F4F;
+    font-family: 'Lato';
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+}
+.btn-text a{
+    color: #1A2C56;
+}
+</style>
