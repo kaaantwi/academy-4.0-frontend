@@ -8,7 +8,7 @@ const route = useRoute();
     <div class="sidebar">
       <div class="sidenav">
         <div class="profile">
-          <img class="profile-img" src="@/assets/icons/leftbanner.png" alt="profile picture" />
+          <img class="profile-img" src="@/assets/icons/Ellipse.png" alt="profile picture" />
           <div class="details">
             <h1 class="profile-name">Andy Cole</h1>
             <p mailto:class="profile-mail">cole@gmal.com</p>
@@ -17,7 +17,7 @@ const route = useRoute();
 
         <div class="sidenav-links">
           <RouterLink class="links" :to="{ name: 'dashboard' }" active-class="active">
-            <div class="icons"><img src="@/assets/icons/dashboardicon.svg" alt="" /></div>
+            <div class="icons"><img src="@/assets/icons/dashboard.svg" alt="" /></div>
             <p class="link-text">Dashboard</p>
           </RouterLink>
 
@@ -27,7 +27,7 @@ const route = useRoute();
           </RouterLink>
 
           <RouterLink class="links logout" :to="{ name: 'users' }">
-            <div class="icons"><img src="@/assets/icons/logouticon.svg" alt="" /></div>
+            <div class="icons"><img src="@/assets/icons/logout.svg" alt="" /></div>
             <p class="link-text">Log Out</p>
           </RouterLink>
         </div>
