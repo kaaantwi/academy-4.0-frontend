@@ -4,18 +4,18 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="layout">
+  <div class="layoutPart">
     <div class="sidebar">
-      <div class="sidenav">
-        <div class="profile">
+      <div class="sideNavigation">
+        <div class="profileSide">
           <img class="profile-img" src="@/assets/icons/leftbanner.png" alt="profile picture" />
           <div class="details">
             <h1 class="profile-name">Andy Cole</h1>
-            <p class="profile-mail">cole@gmal.com</p>
+            <p class="profile-gmail">cole@gmail.com</p>
           </div>
         </div>
 
-        <div class="sidenav-links">
+        <div class="sidenavigation-links">
           <RouterLink class="links" :to="{ name: 'dashboard' }" active-class="active">
             <div class="icons"><img src="@/assets/icons/dashboardicon.svg" alt="" /></div>
             <p class="link-text">Dashboard</p>
@@ -41,98 +41,112 @@ const route = useRoute();
 
 
 <style scoped>
-.layout{
+.layoutPart{
   display: flex;
 }
-.sidenav {
-  font-family: 'Lato';
-  width: 292px;
+.sideNavigation {
   height: 100vh;
+  width: 292px;
+  font-family: 'Lato';
+  border-radius: 8px;
+
   background: #ffffff;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
-  border-radius: 8px;
+  
+}
+.profile-img {
+    border-radius: 80px;
+
+    height: 80px;
+    width: 80px;
 }
 
-
-.profile {
+.profileSide {
     background: #7557D3;
     height: 255px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 13px;
-    color: #fff;
+    color: #fff; 
+    align-items: center;
+    
 }
 
-.profile-img {
-    border-radius: 80px;
-    width: 80px;
-    height: 80px;
-}
+
 
 .details {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 5px;
+    justify-content: center;
+    
+    align-items: center;
+    
+}
+.sidenavigation-links{
+    display: flex;
+    flex-direction: column;
+    padding: 45px;
+    gap: 28px;
+    
 }
 
 .profile-name {
-    color: #FFF;
-    font-family: 'Lato';
-    font-size: 20px;
+    
     font-style: normal;
     font-weight: 700;
+    font-size: 20px;
+    color: #FFF;
+    font-family: 'Lato';
     letter-spacing: -0.4px;
 }
 
-.profile-mail {
+.profile-gmail {
+    
+    
+    font-weight: 400;
     color: #FFF;
     font-family: Lato;
     font-size: 16px;
     font-style: italic;
-    font-weight: 400;
     letter-spacing: -0.32px;
 }
-.sidenav-links{
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding: 45px;
+.icons {
+  height: 15.789px;
+  
+  width: 12px;
 }
 
 .links {
   display: flex;
   gap: 21px;
+  font-family: 'Lato';
+  font-size: 16px;
+  font-weight: 400;
   align-items: center;
   text-decoration: none;
   color: #2B3C4E;
   text-align: center;
-  font-family: 'Lato';
-  font-size: 16px;
-  font-weight: 400;
   line-height: normal;
 }
-
-.icons {
-  width: 12px;
-  height: 15.789px;
-}
-
 .logout {
   margin-top: 32px;
 }
-.active{
-    color: #2B3C4E;
-    text-align: center;
-    font-family: 'Lato';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-}
+
+
+
 .rightContent{
   padding: 102px 47px;
 }
+.active{
+    
+    font-size: 16px;
+    font-style: normal;
+    color: #2B3C4E;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Lato';
+}
+
 </style>
