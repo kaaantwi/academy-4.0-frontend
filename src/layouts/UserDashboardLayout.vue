@@ -47,7 +47,7 @@ const route = useRoute();
 .sidenav {
   font-family: 'Lato';
   width: 292px;
-  height: 100vh;
+  height: 150vh;
   background: #ffffff;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
   border-radius: 8px;
@@ -90,7 +90,7 @@ const route = useRoute();
 
 .profile-mail {
     color: #FFF;
-    font-family: Lato;
+    font-family: 'Lato';
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
