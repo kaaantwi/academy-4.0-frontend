@@ -30,7 +30,7 @@
             </div>
             <div>
                 <button disabled>
-                    <RouterLink class="links" to="/assessment">Take Assessment</RouterLink>
+                    <RouterLink class="links" to="/questions">Take Assessment</RouterLink>
                 </button>
             </div>
         </div>
