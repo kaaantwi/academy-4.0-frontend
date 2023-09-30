@@ -1,5 +1,6 @@
 <script setup>
 import DashboardTitleComponent from '../../components/DashboardTitleComponent.vue';
+import { RouterLink } from 'vue-router';
 import { ref, computed } from "vue";
 
 const currentQuestionIndex = ref(0);
@@ -79,7 +80,7 @@ function previousQuestion() {
       </button>
     </div>
     <div class="btn2">
-      <button class="finish" @click="finishAssessment" :disabled="!isLastQuestion">Finish</button>
+      <RouterLink to="/results"><button class="finish" @click="finishAssessment" :disabled="!isLastQuestion">Finish</button></RouterLink>
     </div>
       
   </section>
