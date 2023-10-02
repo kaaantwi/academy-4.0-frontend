@@ -3,12 +3,15 @@ import HomeView from "../views/HomeView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import LogInView from "../views/LogInView.vue";
 import RegistrationView from "../views/RegistrationView.vue";
-
+//User
 import UserDashboardLayout from "../layouts/UserDashboardLayout.vue";
 import DashboardView from "../views/Users/DashboardView.vue";
 import AssessmentView from "../views/Users/AssessmentView.vue";
 import QuestionsView from "../views/Users/QuestionsView.vue";
 import ResultsView from "../views/Users/ResultsView.vue";
+//Adim
+import AdminLoginView from "../views/Admin/AdminLoginView.vue";
+import AdminDashboardLayout from "../layouts/AdminDashboardLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,8 +70,13 @@ const router = createRouter({
      * ADMIN ROUTES
      */
     {
-      path: "/admin",
-      component: UserDashboardLayout,
+      path: "/adminLogin",
+      name: "adminLogin",
+      component: AdminLoginView,
+    },
+    {
+      path: "/admins",
+      component: AdminDashboardLayout,
       children: [
         {
           path: "login",
@@ -76,9 +84,7 @@ const router = createRouter({
             noAuth: true,
           },
         },
-        {
-          path: "dashboard",
-        },
+        
         {
           path: "create-application",
         },
