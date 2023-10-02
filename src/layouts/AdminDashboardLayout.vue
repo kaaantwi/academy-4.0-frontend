@@ -8,7 +8,7 @@ const route = useRoute();
         <div class="sidebar">
             <div class="sideNavigation">
                 <div class="profilePart">
-                    <img class="profile-img" src="@/assets/icons/leftbanner.png" alt="profile picture" />
+                    <img class="profile-img" src="@/assets/icons/Ellipse.png" alt="profile picture" />
                     <div class="details">
                         <h1 class="profile-name">Andy Cole</h1>
                         <p mailto:class="profile-gmail">cole@gmail.com</p>
@@ -16,21 +16,21 @@ const route = useRoute();
                 </div>
 
                 <div class="sideNavigation-links">
-                    <RouterLink class="links" :to="{ name: 'AdminDashboard' }" active-class="active">
-                        <div class="icons"><img src="@/assets/icons/dashboardicon.svg" alt="" /></div>
+                    <RouterLink class="links" :to="{ name: 'adminDashboard' }" active-class="active">
+                        <div class="icons"><img src="@/assets/icons/dashboard.svg" alt="" /></div>
                         <p class="link-text">Dashboard</p>
                     </RouterLink>
 
-                    <RouterLink class="links" :to="{ name: 'creatapp' }" active-class="active">
+                    <RouterLink class="links" :to="{ name: 'createApplication' }" active-class="active">
                         <div class="icons"><img src="@/assets/icons/assessment.svg" alt="" /></div>
                         <p class="link-text">Create Application</p>
                     </RouterLink>
 
-                    <RouterLink class="links" :to="{ name: 'applicationentries' }" active-class="active">
+                    <RouterLink class="links" :to="{ name: 'applicationEntries' }" active-class="active">
                             <div class="icons"><img src="@/assets/icons/assessment.svg" alt="" /></div>
                             <p class="link-text">Application Entries</p>
                         </RouterLink>
-                    <RouterLink class="links" :to="{ name: 'composeassessment' }" active-class="active">
+                    <RouterLink class="links" :to="{ name: 'createAssessment' }" active-class="active">
                         <div class="icons"><img src="@/assets/icons/assessment.svg" alt="" /></div>
                         <p class="link-text">Compose Assessment</p>
                     </RouterLink>
@@ -47,8 +47,8 @@ const route = useRoute();
                         <p class="link-text">Settings</p>
                     </RouterLink>
 
-                    <RouterLink class="links logout" :to="{ name: 'user' }">
-                        <div class="icons"><img src="@/assets/icons/logouticon.svg" alt="" /></div>
+                    <RouterLink class="links logout" :to="{ name: 'home' }">
+                        <div class="icons"><img src="@/assets/icons/logout.svg" alt="" /></div>
                         <p class="link-text">Log Out</p>
                     </RouterLink>
                 </div>

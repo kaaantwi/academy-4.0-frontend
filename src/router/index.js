@@ -12,6 +12,13 @@ import ResultsView from "../views/Users/ResultsView.vue";
 //Adim
 import AdminLoginView from "../views/Admin/AdminLoginView.vue";
 import AdminDashboardLayout from "../layouts/AdminDashboardLayout.vue";
+import AdminDashboardView from "../views/Admin/AdminDashboardView.vue";
+import CreateApplicationView from "../views/Admin/CreateApplicationView.vue";
+import ApplicationEntriesView from "../views/Admin/ApplicationEntriesView.vue";
+import CreateAssessmentView from "../views/Admin/CreateAssessmentView.vue";
+import AssessmentHistoryView from "../views/Admin/AssessmentHistoryView.vue";
+import AssessmentResultView from "../views/Admin/AssessmentResultView.vue";
+import SettingsView from "../views/Admin/SettingsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,7 +82,7 @@ const router = createRouter({
       component: AdminLoginView,
     },
     {
-      path: "/admins",
+      path: "/admin",
       component: AdminDashboardLayout,
       children: [
         {
@@ -84,9 +91,40 @@ const router = createRouter({
             noAuth: true,
           },
         },
-        
         {
-          path: "create-application",
+          path: "/admin-dashboard",
+          name: "adminDashboard",
+          component: AdminDashboardView,
+        },
+        {
+          path: "/create-application",
+          name: "createApplication",
+          component: CreateApplicationView,
+        },
+        {
+          path: "/application-entries",
+          name: "applicationEntries",
+          component: ApplicationEntriesView,
+        },
+        {
+          path: "/create-assessment",
+          name: "createAssessment",
+          component: CreateAssessmentView,
+        },
+        {
+          path: "/assessment-history",
+          name: "assessmentHistory",
+          component: AssessmentHistoryView,
+        },
+        {
+          path: "/assessment-result",
+          name: "assessmentResult",
+          component: AssessmentResultView,
+        },
+        {
+          path: "/settings",
+          name: "settings",
+          component: SettingsView,
         },
       ],
     },
