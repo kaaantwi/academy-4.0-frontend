@@ -15,7 +15,7 @@ import AdminDashboardLayout from "../layouts/AdminDashboardLayout.vue";
 import AdminDashboardView from "../views/Admin/AdminDashboardView.vue";
 import CreateApplicationView from "../views/Admin/CreateApplicationView.vue";
 import ApplicationEntriesView from "../views/Admin/ApplicationEntriesView.vue";
-import CreateAssessmentView from "../views/Admin/CreateAssessmentView.vue";
+import ComposeAssessmentView from "../views/Admin/ComposeAssessmentView.vue";
 import AssessmentHistoryView from "../views/Admin/AssessmentHistoryView.vue";
 import AssessmentResultView from "../views/Admin/AssessmentResultView.vue";
 import SettingsView from "../views/Admin/SettingsView.vue";
@@ -107,9 +107,9 @@ const router = createRouter({
           component: ApplicationEntriesView,
         },
         {
-          path: "/create-assessment",
-          name: "createAssessment",
-          component: CreateAssessmentView,
+          path: "/compose-assessment",
+          name: "composeAssessment",
+          component: ComposeAssessmentView,
         },
         {
           path: "/assessment-history",
