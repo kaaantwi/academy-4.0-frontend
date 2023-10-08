@@ -4,7 +4,7 @@ const route = useRoute();
 </script>
 
 <template>
-    <div class="layoutPart">
+    <section>
         <div class="sidebar">
             <div class="sideNavigation">
                 <div class="profilePart">
@@ -57,11 +57,16 @@ const route = useRoute();
         <div class="rightContent">
             <RouterView />
         </div>
-    </div>
+    </section>
 </template>
 
 
 <style scoped>
+section {
+    display: grid;
+    grid-template-columns: max-content max-content;
+
+}
 .sideNavigation {
 
     width: 305px;
@@ -72,10 +77,7 @@ const route = useRoute();
 
 }
 
-.layoutPart {
-    display: grid;
-    grid-template-columns: max-content max-content;
-}
+
 
 .profilePart {
     background: #7557D3;

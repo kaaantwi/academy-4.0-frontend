@@ -82,7 +82,7 @@ const router = createRouter({
       component: AdminLoginView,
     },
     {
-      path: "/admin",
+      path: "/admins",
       component: AdminDashboardLayout,
       children: [
         {

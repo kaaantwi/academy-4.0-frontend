@@ -69,7 +69,7 @@ function previousQuestion() {
       <h2>{{ currentQuestion.question }}</h2>
     </div>
     <div class="answers" v-for="(option, index) in currentQuestion.options" :key="index">
-        {{ option }}
+       <label><input type="radio" name="answers"/>{{ option }}</label> 
     </div>
     <div class="btn1">
       <button class="previous" @click="previousQuestion" :disabled="currentQuestionIndex === 0">
