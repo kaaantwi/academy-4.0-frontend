@@ -68,8 +68,10 @@ function previousQuestion() {
 
       <h2>{{ currentQuestion.question }}</h2>
     </div>
-    <div class="answers" v-for="(option, index) in currentQuestion.options" :key="index">
-       <label><input type="radio" name="answers"/>{{ option }}</label> 
+    <div class="ans-box">
+    <div class="answers checkboxes" v-for="(option, index) in currentQuestion.options" :key="index">
+       <input type="radio" name="answers"/><label>{{ option }}</label> 
+    </div>
     </div>
     <div class="btn1">
       <button class="previous" @click="previousQuestion" :disabled="currentQuestionIndex === 0">
@@ -91,7 +93,6 @@ function previousQuestion() {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 326px;
 }
     .heading{
         color: #4F4F4F;
@@ -146,11 +147,18 @@ function previousQuestion() {
       font-weight: 500;
       line-height: normal;
     }
-    .answers{
+    .ans-box{
+      border: #7557D3 1px solid;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding-bottom: 20px;
+      justify-content: center;
+      max-width: 400px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    .answers{
+      display: block;
+      border: 1px solid red;
     }
     .btn1{
       padding-top: 66px;
@@ -200,4 +208,19 @@ function previousQuestion() {
       padding: 11px 81px;
       border-radius: 4px;
     }
+    .checkboxes input[type="radio"] {
+  cursor: pointer;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background-color: #fff;
+  border: 1px solid #2b3c4e;
+  -webkit-appearance: none;
+}
+input[type="radio"]:checked {
+  background-color: black;
+}
+label{
+  margin-left: 20px;
+}
 </style>

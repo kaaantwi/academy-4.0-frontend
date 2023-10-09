@@ -34,7 +34,10 @@ const route = useRoute();
       </div>
     </div>
     <div class="rightContent">
-      <RouterView />
+      <div class="rightSide">
+        <RouterView />
+      </div>
+      
     </div>
   </div>
 </template>
@@ -47,7 +50,7 @@ const route = useRoute();
 .sidenav {
   font-family: 'Lato';
   width: 292px;
-  height: 150vh;
+  height: 100vh;
   background: #ffffff;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
   border-radius: 8px;
@@ -132,7 +135,13 @@ const route = useRoute();
     font-style: normal;
     font-weight: 700;
 }
-.rightContent{
-  padding: 102px 47px;
+.rightContent {
+  height: 100vh;
+  width: calc(100vw - 292px);
+} 
+.rightSide{
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 60px 47px;
 }
 </style>

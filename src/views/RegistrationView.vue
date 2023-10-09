@@ -11,15 +11,22 @@
 
         <div class="application-form">
             <div class="upload">
-                <div class="cv">
-                    <span>&#43;</span>
-                    <p>Upload CV</p>
-                </div>
-                <div class="photo">
-                    <span>&#43;</span>
-                    <p>Upload Photo</p>
-                </div>
+                <input class="cv" id="cv-file" type="file"/>
+                <label class="upload-label" for="cv-file"><span>&#43;</span>
+                    <p>Upload CV</p></label>
+                <input class="photo" id="photo-file" type="file"/>
+                <label class="upload-label" for="cv-file"><span>&#43;</span>
+                    <p>Upload Photo</p></label>
+                
             </div>
+            <!--<div class="uploads">
+                    <div v-for="(input, key) in fileInputs" :key="key">
+                        <input class="fileupload" type="file" 
+                            />
+                        <label class="file-label" :for="key"> + {{ input.label }}</label>
+                        <p v-show="errors[key]">{{ errors[key] }}</p>
+                    </div>
+                </div>-->
 
             <div class="forms">
                 <div class="forms-layout">
@@ -74,13 +81,18 @@
 
 section{
     background: #FDFDFF;
-    padding: 0px 238px 100px 238px;
+    /*padding: 0px 238px 100px 238px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   padding: 50px 0px;
+    
 }
 .title{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 160px;
     padding-bottom: 40px;
     gap: 24px;
 }
@@ -99,15 +111,17 @@ section{
     border-radius: 8px;
     background: #FFF;
     box-shadow: 0px 5px 15px 0px rgba(33, 31, 38, 0.05);
-    padding-top: 52px;
     flex-direction: column;
-    padding-bottom: 40px;
+    padding: 50px;
 }
 .upload{
     display: flex;
     gap: 32px;
 }
 .cv{
+    display: none;
+}
+.upload-label{
     display: flex;
     border-radius: 2.872px;
     border: 1.5px dashed #2B3C4E;
@@ -118,14 +132,7 @@ section{
     gap: 14px;
 }
 .photo{
-    display: flex;
-    border-radius: 2.872px;
-    border: 1.5px dashed #2B3C4E;
-    width: 211px;
-    height: 49.974px;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
+    display: none;
 }
 .forms{
     display: flex;
@@ -157,6 +164,7 @@ section{
     border: 1.5px solid #BDBDBD;
     width: 379px;
     height: 48px;
+    padding: 20px;
 }
 
 button{
@@ -170,5 +178,20 @@ button{
     background: #7557D3;
     border: none;
     border-radius: 4px;
+}
+
+.file-label {
+    width: 211px;
+    height: 49.97px;
+    left: 494px;
+    top: 328px;
+    border: 1.5px dashed #2b3c4e;
+    border-radius: 2.87205px;
+    text-align: center;
+    padding-top: 14px;
+    cursor: pointer;
+}
+.fileupload {
+    display: none;
 }
 </style>

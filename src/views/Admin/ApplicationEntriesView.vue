@@ -24,6 +24,7 @@ const openMainModal = () => {
     </div>
 
     <table>
+      <thead>
         <tr class="head">
             <th>Name</th>
             <th>Email</th>
@@ -42,19 +43,23 @@ const openMainModal = () => {
                 <div class="sort">
                     <p>CGPA</p>
                     <figure>
-                        <img>
+                        <img src="@/assets/icons/sortup.svg">
+                        <img src="@/assets/icons/sortdown.svg">
                     </figure>
                 </div>
             </th>
         </tr>
+      </thead>
+      <tbody>
         <tr @click="openMainModal" class="tail">
             <td>Jack Ice</td>
-            <td>hhhhhh</td>
-            <td>kkkkkk</td>
-            <td>uuuuuu</td>
-            <td>ppppp</td>
-            <td>sssssssss</td>
+            <td>ify@enyata.com</td>
+            <td>12/09/19 - 22</td>
+            <td>3 Sabo Ave, Yaba, Lagos</td>
+            <td>University of Nigeria</td>
+            <td>5.0</td>
         </tr>
+      </tbody>   
     </table>
    </section> 
 </template>
@@ -94,42 +99,37 @@ section{
   }
 
   .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: white;
     background: #2b3c4e;
     border-collapse: collapse;
-    width: 1042px;
     height: 46px;
-    padding-left: 40px;
-    padding-right: 18px;
+    
+   
   }
-
+th{
+   text-align: center;
+}
   .sort {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
   }
 
+
   td {
-    padding: 24px 26px;
+    padding: 24px 0px;
+    text-align: center;
   }
 
   .tail {
-    /* Add styles to align the tail row with the table head */
-    /*background-color: #F0F0F0; */
-    color: #333; /*example text color */
-    display: flex;
-    justify-content: space-between;
-    
+    color: #333;
   }
+
   table {
   border-collapse: collapse;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 1042px;
+  width: 100%;
+  
 }
 .tail:hover {
   background: #ffffff;

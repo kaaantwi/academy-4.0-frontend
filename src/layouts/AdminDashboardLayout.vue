@@ -55,7 +55,9 @@ const route = useRoute();
             </div>
         </div>
         <div class="rightContent">
-            <RouterView />
+            <div class="rightSide">
+                <RouterView />
+            </div>
         </div>
     </section>
 </template>
@@ -63,8 +65,7 @@ const route = useRoute();
 
 <style scoped>
 section {
-    display: grid;
-    grid-template-columns: max-content max-content;
+    display: flex;
 
 }
 .sideNavigation {
@@ -124,14 +125,13 @@ section {
     letter-spacing: -0.32px;
 }
 
+
 .sideNavigation-links {
     display: flex;
     flex-direction: column;
-    padding: 45px;
-    gap: 28px;
-
+    padding: 20px 0;
+    gap: 15px;
 }
-
 .links {
     display: flex;
     gap: 21px;
@@ -142,7 +142,7 @@ section {
     text-decoration: none;
     color: #2B3C4E;
     text-align: center;
-
+    padding: 15px;
     line-height: normal;
 }
 
@@ -156,8 +156,15 @@ section {
 }
 
 .rightContent {
-    padding: 102px 47px;
+  height: 100vh;
+  width: calc(100vw - 292px);
+} 
+.rightSide{
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 60px 47px;
 }
+
 
 .active {
     font-family: 'Lato';
@@ -166,7 +173,7 @@ section {
     text-align: center;
     font-weight: 700;
     font-style: normal;
-
+    border-left: 4px solid #7557D3;
 }
 </style>
 

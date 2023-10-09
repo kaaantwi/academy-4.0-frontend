@@ -37,8 +37,7 @@ import DashboardTitleComponent from '../../components/DashboardTitleComponent.vu
 <style scoped>
 .head {
     display: flex;
-    
-    gap: 532px;
+    justify-content: space-between;
 }
 
 .heading {
@@ -95,6 +94,7 @@ button {
     background-color: #7557D3;
     padding: 10px 80px;
     border: none;
+    border-radius: 4px;
 }
 .hour, .seconds{
         color: #2B3C4E;

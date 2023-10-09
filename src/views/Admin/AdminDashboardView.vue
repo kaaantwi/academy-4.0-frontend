@@ -137,7 +137,7 @@ h6 {
 .cards {
     display: flex;
     justify-content: space-between;
-    gap: 55px;
+
 }
 
 .card {
@@ -148,6 +148,7 @@ h6 {
     border-radius: 4px;
     padding: 34px 34px 34px 0px;
     align-items: start;
+    
 }
 .second{
     border: 1px solid #ECECF9;
@@ -226,11 +227,17 @@ p {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border-left: 7px solid #7557d3;
-    box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
     border-radius: 8px;
     padding: 24px 10px;
-    background-color: #fff;
+
+}
+.batches:hover {
+  background: #ffffff;
+  box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
+  border-left: 7px solid #7557d3;
+  border-radius: 8px 0px 0px 8px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 .batches p{
     color: #4F4F4F;

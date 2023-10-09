@@ -35,7 +35,7 @@ function togglePassword() {
                     </div>
                 </div>
                 <div class="btn">
-                    <RouterLink to="/adminDashboard"><button>Sign In</button></RouterLink>
+                    <RouterLink to="/admin-dashboard"><button>Sign In</button></RouterLink>
                 </div>
             </div>
         </div>
@@ -109,6 +109,7 @@ section{
     height: 48px;
     background-color: transparent;
     color: #fff;
+    padding: 20px;
 }
 
 /*  Additional CSS for the password toggle icon /  */
@@ -147,6 +148,7 @@ button {
     background: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 </style>

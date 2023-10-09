@@ -15,20 +15,25 @@ const router = useRouter()
      </div>
  
      <table>
-         <tr class="head">
+      <thead>
+        <tr class="head">
              <th>Batch</th>
              <th>Date Compsed</th>
              <th>No of Questions</th>
              <th>Time Allocated</th>
              <th>Status</th>
          </tr>
-         <tr class="tail">
+         
+      </thead>
+      <tbody>
+        <tr class="tail">
              <td>Batch 1</td>
              <td>12/07/94</td>
              <td>30</td>
              <td>30 mins</td>
              <td>Taken</td>
          </tr>
+      </tbody>         
      </table>
     </section> 
  </template>
@@ -37,6 +42,7 @@ section{
   display: flex;
   flex-direction: column;
     background: #FDFDFF;
+    width: 100%;
 }
 .app-main{
     padding-bottom: 40px;
@@ -59,35 +65,28 @@ section{
 
 
   .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: white;
     background: #2b3c4e;
     border-collapse: collapse;
-    width: 1042px;
+    width: 100%;
     height: 46px;
-    padding-left: 40px;
-    padding-right: 18px;
+    
   }
 
   td {
     padding: 24px 26px;
+    text-align: center;
   }
 
   .tail {
     /*background-color: #F0F0F0; */
     color: #333; /*example text color */
-    display: flex;
-    justify-content: space-between;
+    
     
   }
   table {
   border-collapse: collapse;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 1042px;
+  width: 100%;
 }
 .tail:hover {
   background: #ffffff;

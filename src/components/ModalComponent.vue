@@ -11,7 +11,7 @@ const showApproveModal = ref(false);
     <div class="main-container">
         <div v-if="!showApproveModal && !showDeclineModal" class="application-entries">
             <div class="profile-picture">
-                <img src="" alt="app profile picture" />
+                <img src="@/assets/icons/Rectangle.png" alt="app profile picture" />
             </div>
             <p class="modal-text">Personal Details</p>
             <hr />

@@ -45,7 +45,6 @@
     align-items: center;
     justify-content: space-between;
     /*border: 1px solid red;*/
-    gap: 326px;
 }
     .heading{
         color: #4F4F4F;

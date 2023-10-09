@@ -47,6 +47,9 @@ const changeTab = (tab) => {
 .section{
     max-width: 730px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
     .tab-btn{
         color: #333758;

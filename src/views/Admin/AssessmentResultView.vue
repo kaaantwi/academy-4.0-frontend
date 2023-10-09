@@ -19,6 +19,7 @@ import { ref } from 'vue';
     </div>
 
     <table>
+      <thead>
         <tr class="head">
             <th>Name</th>
             <th>Email</th>
@@ -52,6 +53,8 @@ import { ref } from 'vue';
                 </div>
             </th>
         </tr>
+      </thead>
+      <tbody>
         <tr class="tail">
             <td>Ify Chinkw</td>
             <td>ify@enyata.com</td>
@@ -61,6 +64,8 @@ import { ref } from 'vue';
             <td>5.0</td>
             <td>15</td>
         </tr>
+      </tbody>  
+        
     </table>
    </section> 
 </template>
@@ -100,16 +105,13 @@ section{
   }
 
   .head {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     color: white;
     background: #2b3c4e;
     border-collapse: collapse;
-    width: 1042px;
+    width: 100%;
     height: 46px;
-    padding-left: 40px;
-    padding-right: 18px;
+    
   }
 
   .sort {
@@ -120,28 +122,25 @@ section{
 
   td {
     padding: 24px 26px;
+    text-align: center;
   }
 
   .tail {
     /*background-color: #F0F0F0; */
     color: #333; /*example text color */
-    display: flex;
-    justify-content: space-between;
+    
+
     
   }
   table {
   border-collapse: collapse;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 1042px;
+  width: 100%;
 }
 .tail:hover {
   background: #ffffff;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
   border-left: 7px solid #7557d3;
   border-radius: 8px 0px 0px 8px;
-  margin-top: 20px;
   cursor: pointer;
 }
 figure{

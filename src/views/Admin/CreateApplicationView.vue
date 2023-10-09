@@ -4,59 +4,47 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-     <section>
+     <div class="container">
             <DashboardTitleComponent cardTitle="Create Application"/>
             <form class="forms">
                 <div class="form-container">
-                    <div class="form-box">
+                    <div class="form-group">
                         <label class="file-label" for="file"> + Choose file</label>
                         <input class="fileupload" type="file" id="file"/>
         
                     </div>
-                    <div class="form-box">
+                    <div class="form-group">
                         <label class="labels">Link</label>
                         <input class="form-input"/>
                         
                     </div>
-                    <div class="form-box">
+                    <div class="form-group">
                         <label class="labels">Application closure date</label>
                         <input class="form-input" type="text" placeholder="dd/mm/yyyy"/>
         
                     </div>
-                    <div class="form-box">
+                    <div class="form-group">
                         <label class="labels">Batch ID</label>
                         <input class="form-input"/>
                     </div>
                 </div>
-                <div class="form-box box3">
+                <div class="form-group box3">
                     <label class="labels">Instructions</label>
                     <textarea class="text-area" name="" id="" ></textarea>
                 </div>
-                <div class="button1" type="submit"><button>Submit</button></div>
+                <div class="btn-container" type="submit"><button>Submit</button></div>
             </form>
 
             
-        </section>
+        </div>
 </template>
 
 <style scoped>
-section{
+.container{
     display: flex;
     flex-direction: column;
     gap: 65px;
     font-family: 'Lato';
-}
-.forms{
-    display: flex;
-    flex-direction: column;
-    
-}
-.form-container {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    place-items: center;
-    gap: 52px 64px;
-    margin-bottom: 36px;
 
 }
 .file-label {
@@ -78,17 +66,25 @@ section{
     display: none;
 }
 
-
-.form-box{
+.forms{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    
 }
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 52px 64px;
+    margin-bottom: 36px;
+
+}
+
 .form-input {
     border: 1.5px solid #2b3c4e;
     border-radius: 4px;
     height: 41px;
-    width: 456px;
+    width: 100%;
     border-radius: 4px;
     margin-top: 5px;
     padding-left: 10px;
@@ -105,11 +101,12 @@ section{
 .text-area {
     margin-top: 5px;
     height: 144px;
-    width: 976px;
+    width: 100%;
     border-radius: 4px;
     border: 1.5px solid #2b3c4e;
     border-radius: 4px;
     resize: none;
+    padding: 10px;
 }
 
 button {
@@ -127,10 +124,15 @@ button {
     cursor: pointer;
 }
 
-.button1 {
+.btn-container {
     text-align: center;
     margin-top: 44px;
 }
 
-
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
 </style>

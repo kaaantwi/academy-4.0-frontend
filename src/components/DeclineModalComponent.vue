@@ -50,6 +50,7 @@ section{
     padding: 14px 50px;
     border-radius: 4px;
     background: #7557D3;
+    border: none;
 }
 
 .no{

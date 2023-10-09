@@ -4,10 +4,14 @@ import { RouterLink } from "vue-router";
 
 // Define a reactive property to track the password visibility
 const passwordVisible = ref(false);
+const confirmPasswordVisible = ref(false);
 
 // Function to toggle password visibility
 function togglePassword() {
   passwordVisible.value = !passwordVisible.value;
+}
+function toggleConfirmPassword() {
+  confirmPasswordVisible.value = !confirmPasswordVisible.value;
 }
 
 </script>
@@ -51,10 +55,10 @@ function togglePassword() {
                         </div>
                     </div>
                     <div class="input-options">
-                        <label for="confirmPassword">Confirm Password</label>
+                        <label for="password">Confirm Password</label>
                         <div class="password-field">
-                            <input :type="passwordVisible ? 'text' : 'password'" class="field-input">
-                            <span class="password-toggle" @click="togglePassword">
+                            <input :type="confirmPasswordVisible ? 'text' : 'password'" class="field-input">
+                            <span class="password-toggle" @click="toggleConfirmPassword">
                                 <img src="../assets/icons/eye.svg"/>
                             </span>
                         </div>
@@ -71,12 +75,18 @@ function togglePassword() {
 </template>
 
 <style scoped>
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .title{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding-top: 160px;
     gap: 24px;
 }
 .title h3{
@@ -117,6 +127,7 @@ function togglePassword() {
     border: 1.5px solid #BDBDBD;
     width: 379px;
     height: 48px;
+    padding: 20px;
 }
 .btn{
     display: flex;
@@ -136,6 +147,7 @@ button{
     padding: 16px 233px;
     background: #7557D3;
     border: none;
+    border-radius: 4px;
 }
 .btn p{
     color: #4F4F4F;

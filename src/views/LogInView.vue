@@ -45,11 +45,17 @@ function togglePassword() {
 </template>
 
 <style scoped>
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
 .main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 225px;
     gap: 24px;
     padding-bottom: 69px;
 }
@@ -86,6 +92,7 @@ function togglePassword() {
     border: 1.5px solid #BDBDBD;
     width: 379px;
     height: 48px;
+    padding: 20px;
 }
 /* Additional CSS for the password toggle icon */
 .password-field {
@@ -121,6 +128,7 @@ button{
     line-height: normal;
     background: #7557D3;
     border: none;
+    border-radius: 4px;
 }
 .btn-text{
     display: flex;
