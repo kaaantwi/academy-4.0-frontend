@@ -1,6 +1,11 @@
 <script setup>
 import { RouterLink, useRoute, RouterView } from 'vue-router';
+
+
 const route = useRoute();
+
+const userDetailsStore = localStorage.getItem("adminDetails")
+const userDetails = JSON.parse(userDetailsStore);
 </script>
 
 <template>
@@ -10,8 +15,8 @@ const route = useRoute();
         <div class="profile">
           <img class="profile-img" src="@/assets/icons/Ellipse.png" alt="profile picture" />
           <div class="details">
-            <h1 class="profile-name">Andy Cole</h1>
-            <p mailto:class="profile-mail">cole@gmal.com</p>
+            <h1 class="profile-name">{{ userDetails.first_name }} {{adminDetails.last_name}}</h1>
+            <p mailto:class="profile-mail">{{ userDetails.email }}</p>
           </div>
         </div>
 

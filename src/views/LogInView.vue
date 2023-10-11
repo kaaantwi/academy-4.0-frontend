@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from "vue-router";
+import axios from "axios";
+import { RouterLink, useRouter } from "vue-router";
 
 // Define a reactive property to track the password visibility
 const passwordVisible = ref(false);
@@ -10,6 +11,30 @@ function togglePassword() {
   passwordVisible.value = !passwordVisible.value;
 }
 
+const emailValue = ref("");
+const passwordValue = ref("");
+const router = useRouter()
+
+async function UserlogIn(){
+    try{
+        const token = localStorage.getItem("token")
+        const answer = await axios.post("http://localhost:6001/api/v1/users/login",
+        {
+           email: emailValue.value,
+           password: passwordValue.value
+        }, { headers: {
+            authorization:token
+        }})  
+        console.log("res", answer)
+        const { firstName, lastName, phoneNumber,id, email, role} = answer.data.data
+        const Normaluser = { firstName, lastName, phoneNumber,id, email, role}
+        localStorage.setItem("token", answer.data.data.token)
+    localStorage.setItem("userDetails", JSON.stringify(Normaluser))
+    router.push({name: "dashboard"});
+    } catch (error){
+        console.log(error)
+    }
+}
 </script>
 
 <template>
@@ -22,19 +47,19 @@ function togglePassword() {
         <div class="forms">
             <div class="input-options">
                 <label for="input">Email Address</label>
-                <input type="text" class="field-input">
+                <input type="text" class="field-input" v-model="emailValue">
             </div>
             <div class="input-options">
                 <label for="password">Password</label>
                 <div class="password-field">
-                    <input :type="passwordVisible ? 'text' : 'password'" class="field-input">
+                    <input :type="passwordVisible ? 'text' : 'password'" class="field-input" v-model="passwordValue">
                     <span class="password-toggle" @click="togglePassword">
                     <img src="../assets/icons/eye.svg"/>
                     </span>
                 </div>
             </div>
             <div class="btn">
-                <RouterLink to="/registration"><button>Sign In</button></RouterLink>
+                <RouterLink to="/registration" ><button @click="UserlogIn">Sign In</button></RouterLink>
                 <div class="btn-text">
                     <p>Don’t have an account yet? <RouterLink to="/signup" class="link">Sign Up</RouterLink></p>
                     <h4>Forgot Password?</h4>

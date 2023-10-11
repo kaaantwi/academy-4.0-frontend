@@ -1,6 +1,48 @@
 <script setup>
+import { ref } from "vue";
 import DashboardTitleComponent from '../../components/DashboardTitleComponent.vue';
-import { RouterLink } from 'vue-router'
+import { useRouter  } from 'vue-router'
+import axios from "axios";
+
+
+const router = useRouter();
+
+const linkValue = ref("");
+const imageUrlValue = ref("");
+const batchIdValue = ref("");
+const instructionsValue = ref("");
+const deadlineValue = ref("");
+
+async function makeApplication() {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.post(
+      "http://localhost:6001/api/v1/application/createB",
+      {
+        batch_id: batchIdValue.value,
+        image_url: imageUrlValue.value,
+        link: linkValue.value,
+        deadline: deadlineValue.value,
+        instructions: instructionsValue.value,
+      },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    console.log("res", response);
+    const { batch_id, link, image_url, deadline, instructions } = response.data.data;
+    const appDetails = { batch_id, image_url, link, deadline, instructions };
+    localStorage.setItem("token", response.data.data.token);
+    localStorage.setItem("applicationDetails", JSON.stringify(appDetails));
+    // const adminDetails = JSON.parse(localStorage.getItem("adminDetails"))   when you want to get admin details
+    router.push({ name: "adminDashboard" });
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <template>
@@ -15,24 +57,25 @@ import { RouterLink } from 'vue-router'
                     </div>
                     <div class="form-group">
                         <label class="labels">Link</label>
-                        <input class="form-input"/>
+                        <input class="form-input" v-model="linkValue"/>
                         
                     </div>
                     <div class="form-group">
                         <label class="labels">Application closure date</label>
-                        <input class="form-input" type="text" placeholder="dd/mm/yyyy"/>
+                        <input class="form-input" type="text" placeholder="dd/mm/yyyy" v-model="deadlineValue"/>
         
                     </div>
                     <div class="form-group">
                         <label class="labels">Batch ID</label>
-                        <input class="form-input"/>
+                        <input class="form-input" v-model="batchIdValue"/>
                     </div>
                 </div>
                 <div class="form-group box3">
                     <label class="labels">Instructions</label>
                     <textarea class="text-area" name="" id="" ></textarea>
                 </div>
-                <div class="btn-container" type="submit"><button>Submit</button></div>
+                <div class="btn-container" type="submit">
+                    <button  @click="makeApplication">Submit</button></div>
             </form>
 
             

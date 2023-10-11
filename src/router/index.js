@@ -87,6 +87,7 @@ const router = createRouter({
       children: [
         {
           path: "login",
+          component: AdminLoginView,
           meta: {
             noAuth: true,
           },
@@ -127,6 +128,11 @@ const router = createRouter({
           component: SettingsView,
         },
       ],
+    },
+    {
+      path: "/adminlogin",
+      name: "adminlogin",
+      component: AdminLoginView
     },
   ],
 });
