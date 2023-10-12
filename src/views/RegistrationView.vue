@@ -33,8 +33,12 @@ const cvError = ref(null);
 const photoError = ref(null);
 
 // const loading = ref(false);
-// const error = ref('');
+//const error = ref(null);
 
+
+// const clearError = (key) => {
+//     errors.value[key] = '';
+// };
 // Create a function to clear error messages
 const clearError = (key) => {
   switch (key) {
@@ -161,7 +165,9 @@ const register = async () => {
               <span>&#43;</span>
               <p>{{ input.label }}</p>
             </label>
-            <p v-show="errors[key]">{{ errors[key] }}</p>
+            <p v-show="cvError">{{ cvError }}</p> 
+            <p v-show="photoError">{{ photoError }}</p>
+            
           </div>
         </div>
   
@@ -220,13 +226,14 @@ const register = async () => {
           </div>
           <div class="btn">
             <RouterLink to="/dashboard">
-              <button type="submit">Submit</button>
+              <button type="submit" @click="register">Submit</button>
             </RouterLink>
           </div>
         </div>
       </form>
     </section>
-  </template>
+
+</template>
   
 
 <style scoped>
