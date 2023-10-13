@@ -1,75 +1,82 @@
 <script setup>
-import { ref, onUpdated } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
-import axios from 'axios';
+import { ref } from "vue";
+import { RouterLink, useRouter } from "vue-router";
+import axios from "axios";
 
-const firstNameValue = ref('');
-const lastNameValue = ref('');
-const emailValue = ref('');
-const dateOfBirthValue = ref('dd/mm/yyyy');
-const addressValue = ref('');
-const universityValue = ref('');
-const courseValue = ref('');
-const cgpaValue = ref('');
-const cvValue = ref('');
-const photoValue = ref('');
+const firstNameValue = ref("");
+const lastNameValue = ref("");
+const emailValue = ref("");
+const dateOfBirthValue = ref("");
+const addressValue = ref("");
+const universityValue = ref("");
+const courseValue = ref("");
+const cgpaValue = ref("");
+const cvValue = ref("");
+const photoValue = ref("");
 
 const router = useRouter();
 
 const fileInputs = ref({
-  cvValue: { accept: 'file_extension', label: 'Upload CV' },
-  imgValue: { accept: 'image/*,.pdf', label: 'Upload Photo' },
+  cvValue: { accept: "file_extension", label: "Upload CV" },
+  photoValue: { accept: "image/*,.pdf", label: "Upload Photo" },
 });
 
-const firstNameError = ref('');
-const lastNameError = ref('');
-const emailError = ref('');
-const dobError = ref('');
-const addressError = ref('');
-const universityError = ref('');
-const courseError = ref('');
-const gpaError = ref('');
+const formInputs = ref({
+  firstNameValue: { label: "First Name", placeholder: "", readonly: true },
+  lastNameValue: { label: "Last Name", placeholder: "", readonly: true },
+  emailAddressValue: { label: "Email", placeholder: "", readonly: true },
+  dateOfBirthValue: { label: "Date of Birth", placeholder: "dd/mm/yyyy", readonly: false },
+  addressValue: { label: "Address", placeholder: "", readonly: false },
+  universityValue: { label: "University", placeholder: "", readonly: false },
+  courseValue: { label: "Course of Study", placeholder: "", readonly: false },
+  cgpaValue: { label: "CGPA", placeholder: "", readonly: false },
+});
+
+// Define error messages using ref
+
+const firstNameError = ref("");
+const lastNameError = ref("");
+const emailError = ref("");
+const dobError = ref("");
+const addressError = ref("");
+const universityError = ref("");
+const courseError = ref("");
+const gpaError = ref("");
 const cvError = ref(null);
 const photoError = ref(null);
 
-// const loading = ref(false);
-//const error = ref(null);
+const error = ref("")
 
-
-// const clearError = (key) => {
-//     errors.value[key] = '';
-// };
-// Create a function to clear error messages
 const clearError = (key) => {
   switch (key) {
-    case 'firstNameValue':
-      firstNameError.value = '';
+    case "firstNameValue":
+      firstNameError.value = "";
       break;
-    case 'lastNameValue':
-      lastNameError.value = '';
+    case "lastNameValue":
+      lastNameError.value = "";
       break;
-    case 'emailValue':
-      emailError.value = '';
+    case "emailValue":
+      emailError.value = "";
       break;
-    case 'dateOfBirthValue':
-      dobError.value = '';
+    case "dateOfBirthValue":
+      dobError.value = "";
       break;
-    case 'addressValue':
-      addressError.value = '';
+    case "addressValue":
+      addressError.value = "";
       break;
-    case 'universityValue':
-      universityError.value = '';
+    case "universityValue":
+      universityError.value = "";
       break;
-    case 'courseValue':
-      courseError.value = '';
+    case "courseValue":
+      courseError.value = "";
       break;
-    case 'cgpaValue':
-      gpaError.value = '';
+    case "cgpaValue":
+      gpaError.value = "";
       break;
-    case 'cvValue':
+    case "cvValue":
       cvError.value = null;
       break;
-    case 'photoValue':
+    case "photoValue":
       photoError.value = null;
       break;
     default:
@@ -78,35 +85,28 @@ const clearError = (key) => {
 };
 
 const selectFileOrImage = (event, key) => {
-  const file = event.target.files[0]; // Get the selected file
+  fileInputs.value[key] = event.target.files[0];
+}; // Get the selected file
 
-  if (file) {
-    if (key === 'cvValue') {
-      cvValue.value = file;
-    } else if (key === 'imgValue') {
-      photoValue.value = file;
-    }
-  } else {
-    if (key === 'cvValue') {
-      cvValue.value = '';
-    } else if (key === 'imgValue') {
-      photoValue.value = '';
-    }
-  }
-};
+const formData = new FormData();
+formData.append("first_Name", firstNameValue.value);
+formData.append("last_Name", lastNameValue.value);
+formData.append("cv_url", cvValue.value);
+formData.append("image_url", photoValue.value);
+formData.append("email", emailValue.value);
+formData.append("date_of_birth", dateOfBirthValue.value);
+formData.append("address", addressValue.value);
+formData.append("university", universityValue.value);
+formData.append("course", courseValue.value);
+formData.append("CGPA", cgpaValue.value);
 
-onUpdated(() => {
-  console.log("cvv", cvValue.value)
-  console.log("cvv", photoValue.value)
-})
 
 const register = async () => {
-  // Validation logic here
-
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const response = await axios.post(
-      'http://localhost:6001/api/v1/application/create',
+      "http://localhost:6001/api/v1/application/create",
+      formData,
       {
         first_Name: firstNameValue.value,
         last_Name: lastNameValue.value,
@@ -122,235 +122,257 @@ const register = async () => {
       {
         headers: {
           authorization: token,
+          "Content-Type": "multipart/form-data",
         },
       }
     );
-    console.log("res" , response)
-    const { first_Name, last_Name, cv_url,image_url, email, date_of_birth, address, university, course, cgpa, status, id, user_id } = response.data.data;
-    const userDetails = { first_Name, last_Name, cv_url,image_url, email, date_of_birth, address, university, course, cgpa, status, id, user_id };
-    // localStorage.setItem("token", response.data.data.token)
-    localStorage.setItem("userApplicationDetails", JSON.stringify(userDetails))
-    localStorage.setItem("userDetails", JSON.stringify(userDetails))
-    // const userDetails = JSON.parse(localStorage.getItem("userDetails"))  
-    router.push({ name: "dashboard" });
-  }
-  catch (error){
-    console.log(error)
-  }
-}
+    console.log("res", response);
+    const {
+      first_Name,
+      last_Name,
+      cv_url,
+      image_url,
+      email,
+      date_of_birth,
+      address,
+      university,
+      course,
+      cgpa,
+      status,
+      id,
+      user_id,
+    } = response.data.data;
 
+    const userDetails = {
+      first_Name,
+      last_Name,
+      cv_url,
+      image_url,
+      email,
+      date_of_birth,
+      address,
+      university,
+      course,
+      cgpa,
+      status,
+      id,
+      user_id,
+    };
+    // localStorage.setItem("token", response.data.data.token)
+    localStorage.setItem("userApplicationDetails", JSON.stringify(userDetails));
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
+    // const userDetails = JSON.parse(localStorage.getItem("userDetails"))
+    router.push({ name: "dashboard" });
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
 
 <template>
-    <section>
-      <div class="title">
-        <img src="../assets/icons/small_logo.svg" alt="logo" />
-        <p>Application Form</p>
-      </div>
-  
-      <form @submit.prevent="register" class="application-form">
-        <div class="upload">
-          <div v-for="(input, key) in fileInputs" :key="key">
+  <section>
+    <div class="title">
+      <img src="../assets/icons/small_logo.svg" alt="logo" />
+      <p>Application Form</p>
+    </div>
+    <div class="application-form">
+      <div class="server-error" v-show="error">{{ error }}</div>
+      <div class="upload">
+        <div v-for="(input, key) in fileInputs" :key="key">
             <input
-              :class="key === 'cvValue' ? 'cv' : 'photo'"
+              class="fileupload"
+              type="file"
               :id="key"
-              :type="key === 'cvValue' ? 'file' : 'text'"
               :name="key"
               :accept="input.accept"
-              :value="key === 'cvValue' ? cvValue : photoValue"
-              @change="(event) => selectFileOrImage(event, key)"
+              @change="selectFileOrImage($event, key)"
               @keypress="clearError(key)"
             />
-            <label :for="key" class="upload-label">
-              <span>&#43;</span>
-              <p>{{ input.label }}</p>
-            </label>
-            <p v-show="cvError">{{ cvError }}</p> 
-            <p v-show="photoError">{{ photoError }}</p>
-            
-          </div>
+            <label class="file-label" :for="key"> + {{ input.label }}</label>
+            <p v-show="errors[key]">{{ errors[key] }}</p>
         </div>
-  
-        <div class="forms">
-          <div class="forms-layout">
-            <div class="input-options">
-              <label for="input">First Name</label>
-              <input type="text" class="field-input" v-model="firstNameValue" />
-              <p v-show="firstNameError">{{ firstNameError }}</p>
-            </div>
-            <div class="input-options">
-              <label for="input">Last Name</label>
-              <input type="text" class="field-input" v-model="lastNameValue" />
-              <p v-show="lastNameError">{{ lastNameError }}</p>
-            </div>
-          </div>
-          <div class="forms-layout">
-            <div class="input-options">
-              <label for="input">Email</label>
-              <input type="text" class="field-input" v-model="emailValue" />
-              <p v-show="emailError">{{ emailError }}</p>
-            </div>
-            <div class="input-options">
-              <label for="input">Date of Birth</label>
-              <input
-                type="text"
-                class="field-input"
-                v-model="dateOfBirthValue"
-              />
-              <p v-show="dobError">{{ dobError }}</p>
-            </div>
-          </div>
-          <div class="forms-layout">
-            <div class="input-options">
-              <label for="input">Address</label>
-              <input type="text" class="field-input" v-model="addressValue" />
-              <p v-show="addressError">{{ addressError }}</p>
-            </div>
-            <div class="input-options">
-              <label for="input">University</label>
-              <input type="text" class="field-input" v-model="universityValue" />
-              <p v-show="universityError">{{ universityError }}</p>
-            </div>
-          </div>
-          <div class="forms-layout">
-            <div class="input-options">
-              <label for="input">Course of Study</label>
-              <input type="text" class="field-input" v-model="courseValue" />
-              <p v-show="courseError">{{ courseError }}</p>
-            </div>
-            <div class="input-options">
-              <label for="input">CGPA</label>
-              <input type="text" class="field-input" v-model="cgpaValue" />
-              <p v-show="gpaError">{{ gpaError }}</p>
-            </div>
-          </div>
-          <div class="btn">
-            <RouterLink to="/dashboard">
-              <button type="submit" @click="register">Submit</button>
-            </RouterLink>
-          </div>
-        </div>
-      </form>
-    </section>
+        <label class="upload-label" for="cv-file">
+          <span>&#43;</span>
+          <p>Upload CV</p>
+        </label>
+        <input class="cv" id="cv-file" type="file"
+         @change="selectFileOrImage($event, 'cvValue')" />
+        <label class="upload-label" for="photo-file">
+          <span>&#43;</span>
+          <p>Upload Photo</p>
+        </label>
+        <input
+          class="photo"
+          id="photo-file"
+          type="file"
+          @change="selectFileOrImage($event, 'photoValue')"
+        />
+      </div>
 
+      <div class="forms">
+        <div class="forms-layout" v-for="(input, key) in formInputs" :key="key">
+          <div class="input-options">
+            <label for="input">First Name</label>
+            <input type="text" class="field-input" v-model="firstNameValue" />
+          </div>
+          <div class="input-options">
+            <label for="input">Last Name</label>
+            <input type="text" class="field-input" v-model="lastNameValue" />
+          </div>
+        </div>
+        <div class="forms-layout">
+          <div class="input-options">
+            <label for="input">Email</label>
+            <input type="text" class="field-input" v-model="emailValue" />
+          </div>
+          <div class="input-options">
+            <label for="input">Date of Birth</label>
+            <input type="text" class="field-input" v-model="dateOfBirthValue" />
+          </div>
+        </div>
+        <div class="forms-layout">
+          <div class="input-options">
+            <label for="input">Address</label>
+            <input type="text" class="field-input" v-model="addressValue" />
+          </div>
+          <div class="input-options">
+            <label for="input">University</label>
+            <input type="text" class="field-input" v-model="universityValue" />
+          </div>
+        </div>
+        <div class="forms-layout">
+          <div class="input-options">
+            <label for="input">Course of Study</label>
+            <input type="text" class="field-input" v-model="courseValue" />
+          </div>
+          <div class="input-options">
+            <label for="input">CGPA</label>
+            <input type="text" class="field-input" v-model="cgpaValue" />
+          </div>
+        </div>
+        <div class="btn">
+          <button type="submit" @click="register">
+          <RouterLink to="/dashboard" class="link">Submit</RouterLink>
+        </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
-  
 
 <style scoped>
-
-section{
-    background: #FDFDFF;
-    /*padding: 0px 238px 100px 238px;*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   padding: 50px 0px;
-    
+section {
+  background: #fdfdff;
+  /*padding: 0px 238px 100px 238px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px;
 }
-.title{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 40px;
-    gap: 24px;
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+  gap: 24px;
 }
-.title p{
-    color: #2B3C4E;
-    font-family: 'Lato';
-    font-size: 24px;
-    font-style: italic;
-    font-weight: 500;
-    line-height: normal;
+.title p {
+  color: #2b3c4e;
+  font-family: "Lato";
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
 }
-.application-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: #FFF;
-    box-shadow: 0px 5px 15px 0px rgba(33, 31, 38, 0.05);
-    flex-direction: column;
-    padding: 50px;
+.application-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 5px 15px 0px rgba(33, 31, 38, 0.05);
+  flex-direction: column;
+  padding: 50px;
 }
-.upload{
-    display: flex;
-    gap: 32px;
+.upload {
+  display: flex;
+  gap: 32px;
 }
-.cv{
-    display: none;
+.cv {
+  display: none;
 }
-.upload-label{
-    display: flex;
-    border-radius: 2.872px;
-    border: 1.5px dashed #2B3C4E;
-    width: 211px;
-    height: 49.974px;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
+.upload-label {
+  display: flex;
+  border-radius: 2.872px;
+  border: 1.5px dashed #2b3c4e;
+  width: 211px;
+  height: 49.974px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
-.photo{
-    display: none;
+.photo {
+  display: none;
 }
-.forms{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 68px;
-    gap: 27px;
+.forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 68px;
+  gap: 27px;
 }
-.forms-layout{
-    display: flex;
-    gap: 73px;
+.forms-layout {
+  display: flex;
+  gap: 73px;
 }
-.input-options{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.input-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.input-options label{
-    color: #4F4F4F;
-    font-family: 'Lato';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.input-options label {
+  color: #4f4f4f;
+  font-family: "Lato";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-.field-input{
-    border-radius: 4px;
-    border: 1.5px solid #BDBDBD;
-    width: 379px;
-    height: 48px;
-    padding: 20px;
+.field-input {
+  border-radius: 4px;
+  border: 1.5px solid #bdbdbd;
+  width: 379px;
+  height: 48px;
+  padding: 20px;
 }
 
-button{
-    color: #FFF;
-    font-family: 'Lato';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    padding: 15px 164px;
-    background: #7557D3;
-    border: none;
-    border-radius: 4px;
+button {
+  color: #fff;
+  font-family: "Lato";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 15px 164px;
+  background: #7557d3;
+  border: none;
+  border-radius: 4px;
 }
 
 .file-label {
-    width: 211px;
-    height: 49.97px;
-    left: 494px;
-    top: 328px;
-    border: 1.5px dashed #2b3c4e;
-    border-radius: 2.87205px;
-    text-align: center;
-    padding-top: 14px;
-    cursor: pointer;
+  width: 211px;
+  height: 49.97px;
+  left: 494px;
+  top: 328px;
+  border: 1.5px dashed #2b3c4e;
+  border-radius: 2.87205px;
+  text-align: center;
+  padding-top: 14px;
+  cursor: pointer;
 }
 .fileupload {
-    display: none;
+  display: none;
 }
 </style>
