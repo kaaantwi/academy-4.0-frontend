@@ -24,6 +24,7 @@ async function adminEnter(){
       }})
     console.log("res", response.data)
     const { firstName, lastName, id, role, email } = response.data.data;
+    console.log(firstName, lastName)
     const user = { firstName, lastName, id, role, email };
     localStorage.setItem("token", response.data.data.token)
     localStorage.setItem("adminDetails", JSON.stringify(user))

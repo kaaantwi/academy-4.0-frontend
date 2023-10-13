@@ -13,13 +13,12 @@ const courseValue = ref("");
 const cgpaValue = ref("");
 const cvValue = ref("");
 const photoValue = ref("");
-
 const router = useRouter();
 
-const fileInputs = ref({
-  cvValue: { accept: "file_extension", label: "Upload CV" },
-  photoValue: { accept: "image/*,.pdf", label: "Upload Photo" },
-});
+// const fileInputs = ref({
+//   cvValue: { accept: "file_extension", label: "Upload CV" },
+//   photoValue: { accept: "image/*,.pdf", label: "Upload Photo" },
+// });
 
 // const formInputs = ref({
 //   firstNameValue: { label: "First Name", placeholder: "", readonly: true },
@@ -54,9 +53,13 @@ const clearErrors = () => {
   }
 };
 
-const selectFileOrImage = (event, key) => {
-  fileInputs.value[key] = event.target.files[0];
- };
+const selectFile = (event) => {
+   cvValue.value = event.target.files[0];
+};
+const selectImage = (event) => {
+   photoValue.value = event.target.files[0];
+};
+
 
 // // const selectFileOrImage = (event, key) => {
 // //   const file = event.target.files[0];
@@ -70,6 +73,7 @@ const selectFileOrImage = (event, key) => {
 
 const register = async () => {
   clearErrors();
+  // isloading.value= false
   try {
     const token = localStorage.getItem("token");
     const formData = new FormData();
@@ -83,30 +87,27 @@ const register = async () => {
     formData.append("university", universityValue.value);
     formData.append("course", courseValue.value);
     formData.append("CGPA", cgpaValue.value);
-      
+
     console.log(formData);
 
-    const response = await axios.post(
-      "http://localhost:6001/api/v1/application/create",
-      formData,{
-        first_Name: firstNameValue.value,
-        last_Name: lastNameValue.value,
-        cv_url: cvValue.value,
-        image_url: photoValue.value,
-        email: emailValue.value,
-        date_of_birth: dateOfBirthValue.value,
-        address: addressValue.value,
-        university: universityValue.value,
-        course: courseValue.value,
-        CGPA: cgpaValue.value,
-      
-        headers: {
-          authorization: token,
-          "Content-Type": "multipart/form-data",
-          // this is for the various file inputs
-        },
-      }
-    );
+    const response = await axios.post("http://localhost:6001/api/v1/application/create", formData, {
+      first_Name: firstNameValue.value,
+      last_Name: lastNameValue.value,
+      cv_url: cvValue.value,
+      image_url: photoValue.value,
+      email: emailValue.value,
+      date_of_birth: dateOfBirthValue.value,
+      address: addressValue.value,
+      university: universityValue.value,
+      course: courseValue.value,
+      CGPA: cgpaValue.value,
+
+      headers: {
+        authorization: token,
+        "Content-Type": "multipart/form-data",
+        // this is for the various file inputs
+      },
+    });
     console.log("res", response);
     const {
       first_Name,
@@ -139,24 +140,25 @@ const register = async () => {
       id,
       user_id,
     };
-   localStorage.setItem("token", response.data.data.token)
+    localStorage.setItem("token", response.data.data.token);
     localStorage.setItem("userApplicationDetails", JSON.stringify(userDetails));
     localStorage.setItem("userDetails", JSON.stringify(userDetails));
     // const userDetails = JSON.parse(localStorage.getItem("userDetails"))
     router.push({ name: "dashboard" });
-    } catch (error) {
-      console.log(error);
-      if (error.response) {
-        const { data } = error.response;
-        if (data && data.errors) {
-          for (const key in data.errors) {
-            if (errorMessages[key]) {
-              errorMessages[key].value = data.errors[key][0];
-            }
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      const { data } = error.response;
+      if (data && data.errors) {
+        for (const key in data.errors) {
+          if (errorMessages[key]) {
+            errorMessages[key].value = data.errors[key][0];
           }
         }
       }
-    }}
+    }
+  }
+};
 </script>
 
 <template>
@@ -167,24 +169,25 @@ const register = async () => {
     </div>
     <div class="application-form">
       <!-- <div class="upload"> -->
-      <!-- Dynamically generated CV input using v-for -->
-      <!-- <div v-for="(input, key) in fileInputs" :key="key">
-        <input
-          :class="key"
-          type="file"
-          :name="key"
-          :accept="input.accept"
-          @change="selectFileOrImage($event, key)"
-          @keypress="clearError(key)"
-        />
-        <label class="upload-label" :for="key">
-          <span>&#43;</span>
-          <p>{{ input.label }}</p>
-        </label>
+        <!-- Dynamically generated CV input using v-for -->
+        <!-- <div v-for="(input, key) in fileInputs" :key="key">
+          <input
+            class="key"
+            type="file"
+            name="key"
+            accept="input.accept"
+            @change="selectFileOrImage($event)"
+            @keypress="clearError(key)"
+          />
+          <label class="upload-label" :for="key">
+            <span>&#43;</span>
+            <p>{{ input.label }}</p>
+          </label>
+        </div>
       </div> -->
       <!-- </div> -->
       <div class="upload">
-        <input class="cv" id="cv-file" type="file" @change="selectFileOrImage($event, 'cvValue')" />
+        <input class="cv" id="cv-file" type="file" @change="selectFile($event)"  accept="file_extension"/>
         <label class="upload-label" for="cv-file">
           <span>&#43;</span>
           <p>Upload CV</p>
@@ -193,7 +196,8 @@ const register = async () => {
           class="photo"
           id="photo-file"
           type="file"
-          @change="selectFileOrImage($event, 'photoValue')"
+          accept="image/*,.pdf"
+          @change="selectImage($event)"
         />
         <label class="upload-label" for="photo-file">
           <span>&#43;</span>
@@ -201,8 +205,6 @@ const register = async () => {
         </label>
       </div>
 
-
-     
       <div class="forms">
         <div class="forms-layout">
           <div class="input-options">
