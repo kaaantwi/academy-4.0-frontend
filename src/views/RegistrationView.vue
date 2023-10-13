@@ -21,93 +21,74 @@ const fileInputs = ref({
   photoValue: { accept: "image/*,.pdf", label: "Upload Photo" },
 });
 
-const formInputs = ref({
-  firstNameValue: { label: "First Name", placeholder: "", readonly: true },
-  lastNameValue: { label: "Last Name", placeholder: "", readonly: true },
-  emailAddressValue: { label: "Email", placeholder: "", readonly: true },
-  dateOfBirthValue: { label: "Date of Birth", placeholder: "dd/mm/yyyy", readonly: false },
-  addressValue: { label: "Address", placeholder: "", readonly: false },
-  universityValue: { label: "University", placeholder: "", readonly: false },
-  courseValue: { label: "Course of Study", placeholder: "", readonly: false },
-  cgpaValue: { label: "CGPA", placeholder: "", readonly: false },
-});
+// const formInputs = ref({
+//   firstNameValue: { label: "First Name", placeholder: "", readonly: true },
+//   lastNameValue: { label: "Last Name", placeholder: "", readonly: true },
+//   emailAddressValue: { label: "Email", placeholder: "", readonly: true },
+//   dateOfBirthValue: { label: "Date of Birth", placeholder: "dd/mm/yyyy", readonly: false },
+//   addressValue: { label: "Address", placeholder: "", readonly: false },
+//   universityValue: { label: "University", placeholder: "", readonly: false },
+//   courseValue: { label: "Course of Study", placeholder: "", readonly: false },
+//   cgpaValue: { label: "CGPA", placeholder: "", readonly: false },
+// });
 
 // Define error messages using ref
 
-const firstNameError = ref("");
-const lastNameError = ref("");
-const emailError = ref("");
-const dobError = ref("");
-const addressError = ref("");
-const universityError = ref("");
-const courseError = ref("");
-const gpaError = ref("");
-const cvError = ref(null);
-const photoError = ref(null);
+const errorMessages = {
+  firstName: ref(""),
+  lastName: ref(""),
+  email: ref(""),
+  dateOfBirth: ref(""),
+  address: ref(""),
+  university: ref(""),
+  course: ref(""),
+  cgpa: ref(""),
+  cv: ref(""),
+  photo: ref(""),
+};
 
-const error = ref("")
-
-const clearError = (key) => {
-  switch (key) {
-    case "firstNameValue":
-      firstNameError.value = "";
-      break;
-    case "lastNameValue":
-      lastNameError.value = "";
-      break;
-    case "emailValue":
-      emailError.value = "";
-      break;
-    case "dateOfBirthValue":
-      dobError.value = "";
-      break;
-    case "addressValue":
-      addressError.value = "";
-      break;
-    case "universityValue":
-      universityError.value = "";
-      break;
-    case "courseValue":
-      courseError.value = "";
-      break;
-    case "cgpaValue":
-      gpaError.value = "";
-      break;
-    case "cvValue":
-      cvError.value = null;
-      break;
-    case "photoValue":
-      photoError.value = null;
-      break;
-    default:
-      break;
+// const error = ref("")
+const clearErrors = () => {
+  for (const key in errorMessages) {
+    errorMessages[key].value = "";
   }
 };
 
 const selectFileOrImage = (event, key) => {
   fileInputs.value[key] = event.target.files[0];
-}; // Get the selected file
+ };
 
-const formData = new FormData();
-formData.append("first_Name", firstNameValue.value);
-formData.append("last_Name", lastNameValue.value);
-formData.append("cv_url", cvValue.value);
-formData.append("image_url", photoValue.value);
-formData.append("email", emailValue.value);
-formData.append("date_of_birth", dateOfBirthValue.value);
-formData.append("address", addressValue.value);
-formData.append("university", universityValue.value);
-formData.append("course", courseValue.value);
-formData.append("CGPA", cgpaValue.value);
-
+// // const selectFileOrImage = (event, key) => {
+// //   const file = event.target.files[0];
+// //   if (key === "photoValue") {
+// //     photoValue.value = file;
+// //   } else if (key === "cvValue") {
+// //     cvValue.value = file;
+// //   }
+// // };
+// }
 
 const register = async () => {
+  clearErrors();
   try {
     const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("first_Name", firstNameValue.value);
+    formData.append("last_Name", lastNameValue.value);
+    formData.append("cv_url", cvValue.value);
+    formData.append("image_url", photoValue.value);
+    formData.append("email", emailValue.value);
+    formData.append("date_of_birth", dateOfBirthValue.value);
+    formData.append("address", addressValue.value);
+    formData.append("university", universityValue.value);
+    formData.append("course", courseValue.value);
+    formData.append("CGPA", cgpaValue.value);
+      
+    console.log(formData);
+
     const response = await axios.post(
       "http://localhost:6001/api/v1/application/create",
-      formData,
-      {
+      formData,{
         first_Name: firstNameValue.value,
         last_Name: lastNameValue.value,
         cv_url: cvValue.value,
@@ -118,11 +99,11 @@ const register = async () => {
         university: universityValue.value,
         course: courseValue.value,
         CGPA: cgpaValue.value,
-      },
-      {
+      
         headers: {
           authorization: token,
           "Content-Type": "multipart/form-data",
+          // this is for the various file inputs
         },
       }
     );
@@ -158,15 +139,24 @@ const register = async () => {
       id,
       user_id,
     };
-    // localStorage.setItem("token", response.data.data.token)
+   localStorage.setItem("token", response.data.data.token)
     localStorage.setItem("userApplicationDetails", JSON.stringify(userDetails));
     localStorage.setItem("userDetails", JSON.stringify(userDetails));
     // const userDetails = JSON.parse(localStorage.getItem("userDetails"))
     router.push({ name: "dashboard" });
-  } catch (error) {
-    console.log(error);
-  }
-};
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        const { data } = error.response;
+        if (data && data.errors) {
+          for (const key in data.errors) {
+            if (errorMessages[key]) {
+              errorMessages[key].value = data.errors[key][0];
+            }
+          }
+        }
+      }
+    }}
 </script>
 
 <template>
@@ -176,30 +166,28 @@ const register = async () => {
       <p>Application Form</p>
     </div>
     <div class="application-form">
-      <div class="server-error" v-show="error">{{ error }}</div>
+      <!-- <div class="upload"> -->
+      <!-- Dynamically generated CV input using v-for -->
+      <!-- <div v-for="(input, key) in fileInputs" :key="key">
+        <input
+          :class="key"
+          type="file"
+          :name="key"
+          :accept="input.accept"
+          @change="selectFileOrImage($event, key)"
+          @keypress="clearError(key)"
+        />
+        <label class="upload-label" :for="key">
+          <span>&#43;</span>
+          <p>{{ input.label }}</p>
+        </label>
+      </div> -->
+      <!-- </div> -->
       <div class="upload">
-        <div v-for="(input, key) in fileInputs" :key="key">
-            <input
-              class="fileupload"
-              type="file"
-              :id="key"
-              :name="key"
-              :accept="input.accept"
-              @change="selectFileOrImage($event, key)"
-              @keypress="clearError(key)"
-            />
-            <label class="file-label" :for="key"> + {{ input.label }}</label>
-            <p v-show="errors[key]">{{ errors[key] }}</p>
-        </div>
+        <input class="cv" id="cv-file" type="file" @change="selectFileOrImage($event, 'cvValue')" />
         <label class="upload-label" for="cv-file">
           <span>&#43;</span>
           <p>Upload CV</p>
-        </label>
-        <input class="cv" id="cv-file" type="file"
-         @change="selectFileOrImage($event, 'cvValue')" />
-        <label class="upload-label" for="photo-file">
-          <span>&#43;</span>
-          <p>Upload Photo</p>
         </label>
         <input
           class="photo"
@@ -207,10 +195,16 @@ const register = async () => {
           type="file"
           @change="selectFileOrImage($event, 'photoValue')"
         />
+        <label class="upload-label" for="photo-file">
+          <span>&#43;</span>
+          <p>Upload Photo</p>
+        </label>
       </div>
 
+
+     
       <div class="forms">
-        <div class="forms-layout" v-for="(input, key) in formInputs" :key="key">
+        <div class="forms-layout">
           <div class="input-options">
             <label for="input">First Name</label>
             <input type="text" class="field-input" v-model="firstNameValue" />
@@ -251,9 +245,7 @@ const register = async () => {
           </div>
         </div>
         <div class="btn">
-          <button type="submit" @click="register">
-          <RouterLink to="/dashboard" class="link">Submit</RouterLink>
-        </button>
+          <RouterLink to="/dashboard"><button @click="register">Submit</button></RouterLink>
         </div>
       </div>
     </div>
