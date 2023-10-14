@@ -7,9 +7,10 @@
             <h1>Profiles Setting</h1>
             <button>Edit</button>
         </div>
+        <hr>
         <form @submit.prevent="save()">
             <div class="image">
-                <img src="../assets/icons/propic.svg" alt="profile image" srcset="" />
+                <img src="../assets/icons/account.png" alt="profile image" srcset="" />
                 <div class="label-form">
                     <input class="fileupload" type="file" id="file" name="filename" />
                     <label class="file-label" for="file"> Upload new image</label>
@@ -20,26 +21,26 @@
                 <div class="form-group">
                     <div>
                         <label>Name</label>
-                        <input class="input-field" placeholder="Full Name" readonly />
+                        <input class="input-field" placeholder="Enyata Group 3" readonly />
                     </div>
                     <div>
                         <label>Email</label>
-                        <input class="input-field" placeholder="Fmai l" readonly />
+                        <input class="input-field" placeholder="enyatagroup3@gmail.com" readonly />
                     </div>
 
                     <div>
                         <label>Phone number</label>
-                        <input type="tel" class="input-field" placeholder="Fhon eNumber" readonly/>
+                        <input type="tel" class="input-field" placeholder="0123456789" readonly/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div>
                         <label>Country</label>
-                        <input class="input-field" placeholder="Foun try" readonly/>
+                        <input class="input-field" placeholder="Ghana" readonly/>
                     </div>
                     <div>
                         <label>Address</label>
-                        <input class="address-input" placeholder="address" readonly />
+                        <input class="address-input" placeholder="3891 Ranchview Dr. Richardson, California 62639" readonly />
                     </div>
                 </div>
             </div>
@@ -58,6 +59,13 @@
     justify-content: space-between;
 }
 
+
+ hr{
+    margin: 16px;
+    background: linear-gradient(0deg, #F2F2F2, #F2F2F2),
+    linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    border: 1px solid #F2F2F2
+ }
 .form-group {
     display: flex;
     gap: 40px;
@@ -198,6 +206,7 @@ img {
     height: 54px;
     border-radius: 50%;
 }
+
 
 .remove {
     cursor: pointer;
