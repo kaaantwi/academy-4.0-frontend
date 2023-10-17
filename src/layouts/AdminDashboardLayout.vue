@@ -10,31 +10,55 @@ import { RouterLink, useRoute, RouterView } from "vue-router";
         <div class="profile">
           <img class="profile-img" src="@/assets/icons/userprofile.png" alt="profile picture" />
           <div class="details">
-            <h1 class="profile-name">kwaku manu</h1>
-            <p class="profile-mail">manu@gmail.com</p>
+            <h1 class="profile-name">Adwoa Amponsah</h1>
+            <p class="profile-mail">adwoaAmp@gmail.com</p>
           </div>
         </div>
+        
 
         <div class="sidenav-links">
-          <RouterLink class="links" :to="{ name: 'dashboard' }" active-class="active">
+          <RouterLink class="links" :to="{ name: 'admindashboard' }" active-class="active">
             <div class="icons"><img src="../assets/icons/clock.svg" alt="" /></div>
             <p class="link-text">Dashboard</p>
           </RouterLink>
+          <RouterLink class="links" :to="{ name: 'createapp' }" active-class="active">
+        <div class="icons"><img src="@/assets/icons/create.svg" alt="" /></div>
+        <p class="link-text">Create Application</p>
+      </RouterLink>
 
-          <RouterLink class="links" :to="{ name: 'assessment' }" active-class="active">
-            <div class="icons"><img src="../assets/icons/note.svg" alt="" /></div>
-            <p class="link-text">Assessment</p>
-          </RouterLink>
-          <!-- 
-            <RouterLink class="links logout" :to="{ name: 'user' }">
-            <div class="icons"><img src="../assets/icons/logout.svg" alt="" /></div>
-            <p class="link-text">Log Out</p>
-          </RouterLink>   -->
+      <RouterLink class="links" :to="{ name: 'applicationentries' }" active-class="active">
+          <div class="icons"><img src="@/assets/icons/application.svg" alt="" /></div>
+          <p class="link-text">Application Entries</p>
+      </RouterLink>
+
+      <RouterLink class="links" :to="{ name: 'composeassessment' }" active-class="active">
+      <div class="icons"><img src="@/assets/icons/compose.svg" alt="" /></div>
+      <p class="link-text">Compose Assessment</p>
+  </RouterLink>
+
+
+  <RouterLink class="links" :to="{ name: 'assessmentHistory' }" active-class="active">
+          <div class="icons"><img src="@/assets/icons/assssment.svg" alt="" /></div>
+          <p class="link-text">Assessment History</p>
+      </RouterLink>
+
+      <RouterLink class="links" :to="{ name: 'assessmentResult' }" active-class="active">
+      <div class="icons"><img src="@/assets/icons/results.svg" alt="" /></div>
+      <p class="link-text">Results</p>
+  </RouterLink>
+
+  <RouterLink class="links" :to="{ name: 'settings' }" active-class="active">
+      <div class="icons"><img src="@/assets/icons/settings.svg" alt="" /></div>
+      <p class="link-text">Settings</p>
+  </RouterLink>
+        
         </div>
-      </div>
+      
+      
+      
+  </div>
     </div>
     <div class="rightContent">
-      
       <RouterView />
     </div>
   </div>
@@ -50,8 +74,8 @@ import { RouterLink, useRoute, RouterView } from "vue-router";
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
 }
 /* .layoutPart {
-  display: flex;
-} */
+    display: flex;
+  } */
 
 .profilePart {
   background: #7557d3;
@@ -109,7 +133,7 @@ import { RouterLink, useRoute, RouterView } from "vue-router";
 }
 .sidenav {
   font-family: "Lato";
-  width: 292px;
+  width: 350px;
   height: 100vh;
   background: #ffffff;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
@@ -216,6 +240,6 @@ import { RouterLink, useRoute, RouterView } from "vue-router";
   font-weight: 700;
 }
 /* .rightContent{
-  padding: 102px 47px;
-} */
+    padding: 102px 47px;
+  } */
 </style>
